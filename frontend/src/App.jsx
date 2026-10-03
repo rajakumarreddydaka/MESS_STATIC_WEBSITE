@@ -78,8 +78,7 @@ function getMenuFilePath(dateString, hostel, messType) {
       : messType === "veg_non_veg"
         ? `${monthName}_${year}_veg-non-veg.json`
         : `${monthName}_${year}_special.json`;
-
-  return `/data/${folder}/${year}/${String(monthNumber).padStart(2, "0")}/${fileName}`;
+return `${import.meta.env.BASE_URL}data/${folder}/${year}/${String(monthNumber).padStart(2, "0")}/${fileName}`;
 }
 
 function getDateString(date = new Date()) {
