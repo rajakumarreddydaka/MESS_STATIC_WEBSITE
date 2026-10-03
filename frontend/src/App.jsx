@@ -1,6 +1,12 @@
 import { useEffect, useMemo, useState } from "react";
 import "./App.css";
 
+const BASE_URL = import.meta.env.BASE_URL;
+
+function assetPath(path) {
+  return `${BASE_URL}${String(path).replace(/^\/+/, "")}`;
+}
+
 const mealOrder = ["breakfast", "lunch", "snacks", "dinner"];
 
 const mealInfo = {
@@ -9,7 +15,7 @@ const mealInfo = {
     mealName: "Breakfast",
     subtitle: "Start your day right",
     emoji: "☀️",
-    images: ["/images/breakfast.png"],
+    images: [assetPath("/images/breakfast.png")],
     className: "morning",
   },
 
@@ -19,8 +25,8 @@ const mealInfo = {
     subtitle: "A satisfying midday meal",
     emoji: "🥗",
     images: [
-      "/images/lunch1.jpg",
-      "/images/lunch2.jpg",
+      assetPath("/images/lunch1.jpg"),
+      assetPath("/images/lunch2.jpg"),
     ],
     className: "afternoon",
   },
@@ -30,7 +36,7 @@ const mealInfo = {
     mealName: "Snacks",
     subtitle: "Something light for the evening",
     emoji: "☕",
-    images: ["/images/snacks.jpg"],
+    images: [assetPath("/images/snacks.jpg")],
     className: "evening",
   },
 
@@ -40,8 +46,8 @@ const mealInfo = {
     subtitle: "End your day with a good meal",
     emoji: "🌙",
     images: [
-      "/images/dinner1.jpg",
-      "/images/dinner2.jpg",
+      assetPath("/images/dinner1.jpg"),
+      assetPath("/images/dinner2.jpg"),
     ],
     className: "night",
   },
@@ -78,7 +84,8 @@ function getMenuFilePath(dateString, hostel, messType) {
       : messType === "veg_non_veg"
         ? `${monthName}_${year}_veg-non-veg.json`
         : `${monthName}_${year}_special.json`;
-return `${import.meta.env.BASE_URL}data/${folder}/${year}/${String(monthNumber).padStart(2, "0")}/${fileName}`;
+
+  return assetPath(`/data/${folder}/${year}/${String(monthNumber).padStart(2, "0")}/${fileName}`);
 }
 
 function getDateString(date = new Date()) {
